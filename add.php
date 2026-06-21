@@ -17,6 +17,98 @@ $values = [
 ];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    function resizeAndCropImage(string $sourcePath, string $destinationPath, int $targetWidth, int $targetHeight): bool {
+        $info = getimagesize($sourcePath);
+        if ($info === false) {
+            return false;
+        }
+
+        [$srcWidth, $srcHeight, $imageType] = $info;
+        switch ($imageType) {
+            case IMAGETYPE_JPEG:
+                $srcImage = imagecreatefromjpeg($sourcePath);
+                break;
+            case IMAGETYPE_PNG:
+                $srcImage = imagecreatefrompng($sourcePath);
+                break;
+            case IMAGETYPE_GIF:
+                $srcImage = imagecreatefromgif($sourcePath);
+                break;
+            case IMAGETYPE_WEBP:
+                $srcImage = imagecreatefromwebp($sourcePath);
+                break;
+            default:
+                return false;
+        }
+
+        if (!$srcImage) {
+            return false;
+        }
+
+        $srcRatio = $srcWidth / $srcHeight;
+        $targetRatio = $targetWidth / $targetHeight;
+
+        if ($srcRatio > $targetRatio) {
+            $intermediateHeight = $targetHeight;
+            $intermediateWidth = (int) round($targetHeight * $srcRatio);
+        } else {
+            $intermediateWidth = $targetWidth;
+            $intermediateHeight = (int) round($targetWidth / $srcRatio);
+        }
+
+        $intermediateImage = imagecreatetruecolor($intermediateWidth, $intermediateHeight);
+        imagecopyresampled(
+            $intermediateImage,
+            $srcImage,
+            0,
+            0,
+            0,
+            0,
+            $intermediateWidth,
+            $intermediateHeight,
+            $srcWidth,
+            $srcHeight
+        );
+
+        $finalImage = imagecreatetruecolor($targetWidth, $targetHeight);
+        imagecopy(
+            $finalImage,
+            $intermediateImage,
+            0,
+            0,
+            (int) floor(($intermediateWidth - $targetWidth) / 2),
+            (int) floor(($intermediateHeight - $targetHeight) / 2),
+            $targetWidth,
+            $targetHeight
+        );
+
+        $extension = strtolower(pathinfo($destinationPath, PATHINFO_EXTENSION));
+        $result = false;
+        switch ($extension) {
+            case 'jpg':
+            case 'jpeg':
+                $result = imagejpeg($finalImage, $destinationPath, 90);
+                break;
+            case 'png':
+                imagealphablending($finalImage, false);
+                imagesavealpha($finalImage, true);
+                $result = imagepng($finalImage, $destinationPath, 9);
+                break;
+            case 'gif':
+                $result = imagegif($finalImage, $destinationPath);
+                break;
+            case 'webp':
+                $result = imagewebp($finalImage, $destinationPath, 90);
+                break;
+        }
+
+        imagedestroy($srcImage);
+        imagedestroy($intermediateImage);
+        imagedestroy($finalImage);
+
+        return (bool) $result;
+    }
+
     foreach ($values as $key => $value) {
         $values[$key] = trim((string)($_POST[$key] ?? ''));
     }
@@ -42,8 +134,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $filename = sprintf('profile-%s.%s', bin2hex(random_bytes(8)), $extension);
             $destination = $uploadDir . '/' . $filename;
 
-            if (!move_uploaded_file($_FILES['photo_file']['tmp_name'], $destination)) {
-                $errors[] = 'Unable to save uploaded photo. Please try again.';
+            if (!resizeAndCropImage($_FILES['photo_file']['tmp_name'], $destination, 512, 512)) {
+                $errors[] = 'Unable to resize the uploaded photo. Please try another image.';
             } else {
                 $photoPath = 'assets/images/uploads/' . $filename;
             }
