@@ -15,8 +15,8 @@
     <section class="about-hero">
         <div class="section-heading">
             <span class="eyebrow">About this project</span>
-            <h1>Personal CV Portfolio Showcase</h1>
-            <p>This demo website displays multiple CV profiles from a MySQL database using PHP and PDO. Each profile loads dynamically on the home page and in the full CV detail view.</p>
+            <h1>Personal CV Showcase</h1>
+            <p>This basic website displays multiple CV profiles from a MySQL database using PHP and PDO.</p>
         </div>
     </section>
 
@@ -35,7 +35,7 @@
             <li><strong>photo</strong> — profile photo path</li>
             <li><strong>email</strong>, <strong>phone</strong>, <strong>address</strong> — contact details</li>
             <li><strong>about_me</strong>, <strong>education</strong>, <strong>experience</strong>, <strong>skills</strong>, <strong>languages</strong> — resume content</li>
-            <li><strong>facebook</strong>, <strong>linkedin</strong>, <strong>github</strong> — social links</li>
+            <li><strong>github</strong> — social links</li>
             <li><strong>created_at</strong> — record timestamp</li>
         </ul>
     </section>

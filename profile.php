@@ -56,8 +56,6 @@ function renderList($text) {
                 <div><strong>Address</strong><span><?= escape($profile['address']); ?></span></div>
             </div>
             <div class="social-badges">
-                <?php if ($profile['facebook']): ?><a href="<?= escape($profile['facebook']); ?>" target="_blank" rel="noopener">Facebook</a><?php endif; ?>
-                <?php if ($profile['linkedin']): ?><a href="<?= escape($profile['linkedin']); ?>" target="_blank" rel="noopener">LinkedIn</a><?php endif; ?>
                 <?php if ($profile['github']): ?><a href="<?= escape($profile['github']); ?>" target="_blank" rel="noopener">GitHub</a><?php endif; ?>
             </div>
             <div class="profile-actions">

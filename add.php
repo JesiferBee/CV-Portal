@@ -13,8 +13,6 @@ $values = [
     'experience' => '',
     'skills' => '',
     'languages' => '',
-    'facebook' => '',
-    'linkedin' => '',
     'github' => '',
 ];
 
@@ -87,8 +85,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($errors)) {
         $stmt = $pdo->prepare(
-            'INSERT INTO profiles (fullname, job_title, photo, email, phone, address, about_me, education, experience, skills, languages, facebook, linkedin, github)
-             VALUES (:fullname, :job_title, :photo, :email, :phone, :address, :about_me, :education, :experience, :skills, :languages, :facebook, :linkedin, :github)'
+            'INSERT INTO profiles (fullname, job_title, photo, email, phone, address, about_me, education, experience, skills, languages, github)
+             VALUES (:fullname, :job_title, :photo, :email, :phone, :address, :about_me, :education, :experience, :skills, :languages, :github)'
         );
 
         $stmt->execute([
@@ -103,8 +101,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'experience' => $values['experience'],
             'skills' => $values['skills'],
             'languages' => $values['languages'],
-            'facebook' => $values['facebook'] ?: null,
-            'linkedin' => $values['linkedin'] ?: null,
             'github' => $values['github'] ?: null,
         ]);
 
@@ -191,14 +187,6 @@ function escape($value) {
                 <div class="form-field">
                     <label for="languages">Languages</label>
                     <input id="languages" name="languages" type="text" placeholder="Comma-separated" value="<?= escape($values['languages']); ?>" required>
-                </div>
-                <div class="form-field">
-                    <label for="facebook">Facebook URL</label>
-                    <input id="facebook" name="facebook" type="url" value="<?= escape($values['facebook']); ?>">
-                </div>
-                <div class="form-field">
-                    <label for="linkedin">LinkedIn URL</label>
-                    <input id="linkedin" name="linkedin" type="url" value="<?= escape($values['linkedin']); ?>">
                 </div>
                 <div class="form-field">
                     <label for="github">GitHub URL</label>

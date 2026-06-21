@@ -28,8 +28,6 @@ $values = [
     'experience' => $profile['experience'],
     'skills' => $profile['skills'],
     'languages' => $profile['languages'],
-    'facebook' => $profile['facebook'],
-    'linkedin' => $profile['linkedin'],
     'github' => $profile['github'],
 ];
 $photoPath = $profile['photo'];
@@ -102,7 +100,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (empty($errors)) {
         $stmt = $pdo->prepare(
-            'UPDATE profiles SET fullname = :fullname, job_title = :job_title, photo = :photo, email = :email, phone = :phone, address = :address, about_me = :about_me, education = :education, experience = :experience, skills = :skills, languages = :languages, facebook = :facebook, linkedin = :linkedin, github = :github WHERE id = :id'
+            'UPDATE profiles SET fullname = :fullname, job_title = :job_title, photo = :photo, email = :email, phone = :phone, address = :address, about_me = :about_me, education = :education, experience = :experience, skills = :skills, languages = :languages, github = :github WHERE id = :id'
         );
 
         $stmt->execute([
@@ -117,8 +115,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'experience' => $values['experience'],
             'skills' => $values['skills'],
             'languages' => $values['languages'],
-            'facebook' => $values['facebook'] ?: null,
-            'linkedin' => $values['linkedin'] ?: null,
             'github' => $values['github'] ?: null,
             'id' => $id,
         ]);
@@ -205,14 +201,6 @@ function escape($value) {
                 <div class="form-field">
                     <label for="languages">Languages</label>
                     <input id="languages" name="languages" type="text" placeholder="Comma-separated" value="<?= escape($values['languages']); ?>" required>
-                </div>
-                <div class="form-field">
-                    <label for="facebook">Facebook URL</label>
-                    <input id="facebook" name="facebook" type="url" value="<?= escape($values['facebook']); ?>">
-                </div>
-                <div class="form-field">
-                    <label for="linkedin">LinkedIn URL</label>
-                    <input id="linkedin" name="linkedin" type="url" value="<?= escape($values['linkedin']); ?>">
                 </div>
                 <div class="form-field">
                     <label for="github">GitHub URL</label>
