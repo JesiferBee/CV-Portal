@@ -118,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         mkdir($uploadDir, 0755, true);
     }
 
-    $photoPath = 'assets/images/default-profile.svg';
+    $photoPath = 'assets/images/default-profile.png';
     if (!empty($_FILES['photo_file']['name']) && is_uploaded_file($_FILES['photo_file']['tmp_name'])) {
         $allowedTypes = [
             'image/jpeg' => 'jpg',

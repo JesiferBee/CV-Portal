@@ -34,7 +34,7 @@
     <section class="content-block donate-block">
         <h2>Donate us</h2>
         <p>Support the project by scanning the QR code below.</p>
-        <img src="assets/images/donate-qr.svg" alt="Donate QR code" class="donate-qr-inline">
+        <img src="assets/images/donate-qr.png" alt="Donate QR code" class="donate-qr-inline">
     </section>
 </main>
 
