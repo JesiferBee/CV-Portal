@@ -27,22 +27,14 @@
     </section>
 
     <section class="content-block">
-        <h2>Database structure</h2>
-        <ul>
-            <li><strong>id</strong> — unique profile identifier</li>
-            <li><strong>fullname</strong> — candidate name</li>
-            <li><strong>job_title</strong> — position or role</li>
-            <li><strong>photo</strong> — profile photo path</li>
-            <li><strong>email</strong>, <strong>phone</strong>, <strong>address</strong> — contact details</li>
-            <li><strong>about_me</strong>, <strong>education</strong>, <strong>experience</strong>, <strong>skills</strong>, <strong>languages</strong> — resume content</li>
-            <li><strong>github</strong> — social links</li>
-            <li><strong>created_at</strong> — record timestamp</li>
-        </ul>
+        <h2>Security and best practices</h2>
+        <p>The database connection is handled in <code>pdo.php</code> using PDO prepared statements, which helps prevent SQL injection. Data shown on the page is escaped with <code>htmlspecialchars()</code> before it reaches the browser.</p>
     </section>
 
-    <section class="content-block">
-        <h2>Security and best practices</h2>
-        <p>The database connection is stored in <code>pdo.php</code> and uses a PDO instance with prepared statements to prevent SQL injection. Every value that is sent to the browser is escaped with <code>htmlspecialchars()</code> to keep output safe.</p>
+    <section class="content-block donate-block">
+        <h2>Donate us</h2>
+        <p>Support the project by scanning the QR code below.</p>
+        <img src="assets/images/donate-qr.svg" alt="Donate QR code" class="donate-qr-inline">
     </section>
 </main>
 

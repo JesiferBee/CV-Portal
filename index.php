@@ -39,8 +39,8 @@ $jobTitles = $pdo->query('SELECT DISTINCT job_title FROM profiles ORDER BY job_t
 <main class="page-content">
     <section class="hero-section">
         <div class="hero-copy">
-            <span class="eyebrow">Interactive CV Portal</span>
-            <h1>Discover modern CV profiles powered by PHP & MySQL.</h1>
+            <span class="eyebrow">CV Portal</span>
+            <h1>Modern CV Profile</h1>
             <p>Browse multiple candidates, search by name, filter by job title, and view full CV pages with clean responsive design.</p>
         </div>
         <div class="hero-actions">
@@ -58,6 +58,39 @@ $jobTitles = $pdo->query('SELECT DISTINCT job_title FROM profiles ORDER BY job_t
                 </select>
                 <button type="submit" class="btn-primary">Search</button>
             </form>
+        </div>
+    </section>
+
+    <section class="featured-professions">
+        <div class="section-heading">
+            <span class="eyebrow">Most sought after professions</span>
+            <h2>Top 3 roles employers are looking for today.</h2>
+        </div>
+        <div class="feature-grid">
+            <article class="feature-card">
+                <h3>Full Stack Developer</h3>
+                <p>Skilled in both frontend and backend development for modern web applications.</p>
+                <form method="get" action="index.php" class="profession-filter-form">
+                    <input type="hidden" name="filter" value="Full Stack Developer">
+                    <button type="submit" class="btn-secondary">See Full Stack Developers</button>
+                </form>
+            </article>
+            <article class="feature-card">
+                <h3>UI/UX Designer</h3>
+                <p>Designs user-friendly interfaces and experiences that drive engagement.</p>
+                <form method="get" action="index.php" class="profession-filter-form">
+                    <input type="hidden" name="filter" value="UI/UX Designer">
+                    <button type="submit" class="btn-secondary">See UI/UX Designers</button>
+                </form>
+            </article>
+            <article class="feature-card">
+                <h3>Data Analyst</h3>
+                <p>Transforms data into insights to support smarter business decisions.</p>
+                <form method="get" action="index.php" class="profession-filter-form">
+                    <input type="hidden" name="filter" value="Data Analyst">
+                    <button type="submit" class="btn-secondary">See Data Analysts</button>
+                </form>
+            </article>
         </div>
     </section>
 
@@ -98,20 +131,6 @@ $jobTitles = $pdo->query('SELECT DISTINCT job_title FROM profiles ORDER BY job_t
         <?php endif; ?>
     </section>
 
-    <section class="feature-grid">
-        <article class="feature-card">
-            <h3>Dynamic data</h3>
-            <p>All CV details are stored in a MySQL table and loaded dynamically through PHP for each profile page.</p>
-        </article>
-        <article class="feature-card">
-            <h3>Responsive design</h3>
-            <p>The layout adapts for desktop, tablet, and mobile with smooth animations and clean spacing.</p>
-        </article>
-        <article class="feature-card">
-            <h3>Search & filter</h3>
-            <p>Find the right candidate quickly using the search bar and job title filter controls.</p>
-        </article>
-    </section>
 </main>
 
 <a href="#top" id="scrollTop" class="scroll-top" aria-label="Scroll to top">↑</a>
